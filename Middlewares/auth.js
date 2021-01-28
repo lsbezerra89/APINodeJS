@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-//const config = require('../config/config');
+const config = require('../Config/configs');
 
 const auth = (req, res, next) => {
     const token_header = req.headers.auth;
@@ -8,7 +8,7 @@ const auth = (req, res, next) => {
     }
 
 
-    jwt.verify(token_header, "atlasOne2021", (err, decoded) => {
+    jwt.verify(token_header, config.jwt_password, (err, decoded) => {
         if (err) {
             return res.status(401).send({ error: 'Invalid token' });
         }
